@@ -1,0 +1,60 @@
+@startuml
+class Log.LogComplexNumberCalculator {
+- ComplexNumberCalculable calculator
+- Loggable logger
++ ComplexNumberCalculator addition(ComplexNumber)
++ ComplexNumberCalculator multiplication(ComplexNumber)
++ ComplexNumber getResult()
+}
+class Log.LogCalculatorFactory {
+- CalculatorFactorable firstFactory
+- Loggable logger
++ ComplexNumberCalculable create(ComplexNumber)
+}
+class Main {
++ {static} void main(String[])
+}
+interface Log.Loggable {
+~ void log(String)
+}
+interface Calculator.CalculatorFactorable {
+~ ComplexNumberCalculable create(ComplexNumber)
+}
+interface Calculator.ComplexNumberCalculable {
+~ ComplexNumberCalculator addition(ComplexNumber)
+~ ComplexNumberCalculator multiplication(ComplexNumber)
+~ ComplexNumber getResult()
+}
+class Calculator.CalculatorFactory {
++ ComplexNumberCalculable create(ComplexNumber)
+}
+class Calculator.ComplexNumberCalculator {
+- ComplexNumber resultNumber
++ ComplexNumberCalculator addition(ComplexNumber)
++ ComplexNumberCalculator multiplication(ComplexNumber)
++ ComplexNumber getResult()
+}
+class Calculator.ComplexNumber {
+- double real
+- double imaginary
++ double getReal()
++ double getImaginary()
++ String toString()
+}
+class Console {
+- CalculatorFactorable calculatorFactory
++ void run()
+- String input(String)
+- ComplexNumber inputComplex(String)
+}
+class Log.Logger {
++ void log(String)
+}
+
+
+Calculator.ComplexNumberCalculable <|.. Log.LogComplexNumberCalculator
+Calculator.CalculatorFactorable <|.. Log.LogCalculatorFactory
+Calculator.CalculatorFactorable <|.. Calculator.CalculatorFactory
+Calculator.ComplexNumberCalculable <|.. Calculator.ComplexNumberCalculator
+Log.Loggable <|.. Log.Logger
+@enduml
