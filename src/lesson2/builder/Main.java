@@ -3,18 +3,18 @@ public class Main {
     public static void main(String[] args) {
         Dress dress1 = new DressBuilder()
                 .setColour("blue")
-                .setNeckStyle("collared Neck")
+                .setNeckStyle("collared neck")
                 .setSize(44)
-                .setSleeveLength("short Sleeve")
+                .setSleeveLength("short sleeve")
                 .setMaterial("cotton")
                 .setOccasion("casual")
                 .build();
 
         Dress dress2 = new DressBuilder()
                 .setColour("red")
-                .setNeckStyle("V-Neck")
+                .setNeckStyle("v-neck")
                 .setSize(46)
-                .setSleeveLength("Long Sleeve")
+                .setSleeveLength("long sleeve")
                 .setMaterial("viscose")
                 .setOccasion("casual")
                 .build();

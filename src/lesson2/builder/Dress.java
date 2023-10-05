@@ -20,13 +20,16 @@ public class Dress {
 
     @Override
     public String toString() {
-        return "Dress {" +
-                "colour: " + colour + '\'' +
-                ", neckStyle: '" + neckStyle + '\'' +
-                ", size: " + size +
-                ", sleeveLength: '" + sleeveLength + '\'' +
-                ", material: '" + material + '\'' +
-                ", occasion: '" + occasion + '\'' +
-                '}';
+
+        return String.format("Dress: colour: %s, neckStyle: %s, size: %d, sleeveLength: %s, material: %s, occasion: %s ", colour, neckStyle,
+                size, sleeveLength, material, occasion);
+//        return "Dress {" +
+//                "colour: " + colour + '\'' +
+//                ", neckStyle: '" + neckStyle + '\'' +
+//                ", size: " + size +
+//                ", sleeveLength: '" + sleeveLength + '\'' +
+//                ", material: '" + material + '\'' +
+//                ", occasion: '" + occasion + '\'' +
+//                '}';
     }
 }

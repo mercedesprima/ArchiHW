@@ -1,5 +1,4 @@
 package lesson2.builder;
-
 public class DressBuilder {
     private String colour;
     private String neckStyle;
