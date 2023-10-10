@@ -1,12 +1,12 @@
 @startuml
-class Log.LogComplexNumberCalculator {
+class LogComplexNumberCalculator {
 - ComplexNumberCalculable calculator
 - Loggable logger
 + ComplexNumberCalculator addition(ComplexNumber)
 + ComplexNumberCalculator multiplication(ComplexNumber)
 + ComplexNumber getResult()
 }
-class Log.LogCalculatorFactory {
+class LogCalculatorFactory {
 - CalculatorFactorable firstFactory
 - Loggable logger
 + ComplexNumberCalculable create(ComplexNumber)
@@ -14,27 +14,27 @@ class Log.LogCalculatorFactory {
 class Main {
 + {static} void main(String[])
 }
-interface Log.Loggable {
+interface Loggable {
 ~ void log(String)
 }
-interface Calculator.CalculatorFactorable {
+interface CalculatorFactorable {
 ~ ComplexNumberCalculable create(ComplexNumber)
 }
-interface Calculator.ComplexNumberCalculable {
+interface ComplexNumberCalculable {
 ~ ComplexNumberCalculator addition(ComplexNumber)
 ~ ComplexNumberCalculator multiplication(ComplexNumber)
 ~ ComplexNumber getResult()
 }
-class Calculator.CalculatorFactory {
+class CalculatorFactory {
 + ComplexNumberCalculable create(ComplexNumber)
 }
-class Calculator.ComplexNumberCalculator {
+class ComplexNumberCalculator {
 - ComplexNumber resultNumber
 + ComplexNumberCalculator addition(ComplexNumber)
 + ComplexNumberCalculator multiplication(ComplexNumber)
 + ComplexNumber getResult()
 }
-class Calculator.ComplexNumber {
+class ComplexNumber {
 - double real
 - double imaginary
 + double getReal()
@@ -47,14 +47,30 @@ class Console {
 - String input(String)
 - ComplexNumber inputComplex(String)
 }
-class Log.Logger {
+class Logger {
 + void log(String)
 }
 
 
-Calculator.ComplexNumberCalculable <|.. Log.LogComplexNumberCalculator
-Calculator.CalculatorFactorable <|.. Log.LogCalculatorFactory
-Calculator.CalculatorFactorable <|.. Calculator.CalculatorFactory
-Calculator.ComplexNumberCalculable <|.. Calculator.ComplexNumberCalculator
-Log.Loggable <|.. Log.Logger
+ComplexNumberCalculable <|.. LogComplexNumberCalculator
+CalculatorFactorable <|.. LogCalculatorFactory
+CalculatorFactorable <|.. CalculatorFactory
+ComplexNumberCalculable <|.. ComplexNumberCalculator
+'Ассоциация: Класс Console содержит ссылку на объект CalculatorFactory'
+Console --> CalcucatorFactory : Association
+CalculatorFactory ..> Logger : uses
+CalculatorFactory "1" *.. "1" ComplexNumberCalculator : creates
+'Ассоциация: Класс LogCalcFactory содержит ссылку на объект CalcFactorable'
+LogCalculatorFactory -- CalculatorFactorable : Association
+'Зависимость: Класс Main использует класса LogCalculatorFactory для создания объектов, то есть зависит от него.'
+Main --> LogCalculatorFactory : Dependency
+'Реализация: Класс Logger реализует интерфейс Loggable. Logger реализует метод log(String) из интерфейса.'
+Logger --|> Loggable : Implements
+'Реализация: Класс CalculatorFactory реализует интерфейс CalculatorFactorable.'
+CalculatorFactory --|> CalculatorFactorable : Implements
+'Композиция: Класс LogComplexNumberCalculator содержит объект Calculator '
+LogComplexNumberCalculator --o Calculator : Contains
+'Агрегация: Класс LogComplexNumberCalculator агрегирует (содержит) объект класса ComplexNumberCalculator,
+ 'представляющий вычисления комплексных чисел.'
+ LogComplexNumberCalculator --o ComplexNumberCalculator : Aggregation
 @enduml
