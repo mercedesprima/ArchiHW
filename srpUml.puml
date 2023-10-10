@@ -1,0 +1,32 @@
+@startuml
+'1. Single Responsibility Principle (SRP): Каждый класс отвечает за одну задачу. Так, у каждого класса своя задача:
+'класс Main создает объект, класс Point получает координаты, класс Square считает, класс SquareDraw рисует фигуру, '
+
+class lesson3.srp.Square {
+- List<Point> points
+- int side
++ List<Point> getPoints()
++ int getArea()
++ void setSide(int)
++ int getSide()
+}
+class lesson3.srp.Main {
++ {static} void main(String[])
+}
+class lesson3.srp.SquareDraw {
+- int side
++ int getSide()
++ void setSide(int)
++ void draw()
+}
+class lesson3.srp.Point {
+- int x
+- int y
++ int getY()
++ int getX()
+}
+Square --|> Point : Contains
+Main --> Square : Uses
+Main <.. SquareDraw : Uses
+SquareDraw *-- Square : Controls
+@enduml
