@@ -1,0 +1,51 @@
+@startuml
+interface lesson8.MVI.model.ViewState {
+}
+class lesson8.MVI.Main {
++ {static} void main(String[])
+}
+class lesson8.MVI.presenter.TasksPresenter {
+- List<Task> tasks
+- BaseView view
++ void dispatch(Intent)
++ void loadTasks()
+}
+class lesson8.MVI.model.TasksViewState {
+- List<Task> tasks
++ String toString()
+}
+class lesson8.MVI.model.Task {
+- String name
+- boolean completed
++ void complete()
++ boolean isCompleted()
++ String toString()
+}
+interface lesson8.MVI.view.BaseView {
+~ void render(ViewState)
+}
+class lesson8.MVI.model.TaskCompletedIntent {
+~ int taskId
++ int getTaskId()
+}
+interface lesson8.MVI.model.Intent {
+}
+class lesson8.MVI.view.ConsoleView {
++ void render(ViewState)
+}
+
+
+lesson8.MVI.model.ViewState <|.. lesson8.MVI.model.TasksViewState
+lesson8.MVI.model.Intent <|.. lesson8.MVI.model.TaskCompletedIntent
+lesson8.MVI.view.BaseView <|.. lesson8.MVI.view.ConsoleView
+
+MVI.view.BaseView <|.. MVI.view.ConsoleView
+MVI.model.ViewState <|.. MVI.model.TasksViewState
+MVI.model.Intent <|.. MVI.model.TaskCompletedIntent
+
+lesson8.MVI.Main ..> lesson8.MVI.view.ConsoleView : creates
+lesson8.MVI.Main ..> lesson8.MVI.presenter.TasksPresenter : creates
+lesson8.MVI.presenter.TasksPresenter "1" *.. "1..*" lesson8.MVI.model.Task : creates
+lesson8.MVI.Main "1" *.. "1..*" lesson8.MVI.model.TaskCompletedIntent: creates
+lesson8.MVI.presenter.TasksPresenter "1" *.. "1..*" lesson8.MVI.model.TasksViewState : creates
+@enduml
