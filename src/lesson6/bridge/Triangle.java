@@ -7,6 +7,6 @@ class Triangle extends Shape {
         this.color = color;
     }
     public void draw() {
-        System.out.println("Drawing a triangle with color: " + color.getColor());
+//        System.out.println("Drawing a triangle with color: " + color.getColor());
     }
 }
